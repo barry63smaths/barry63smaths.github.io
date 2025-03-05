@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0DW0ZG97K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Z0DW0ZG97K');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Web App</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="data:application/json;base64,eyJtZWFuIjoiV2VhYkFwcCIsInBvcnRhaW5nIjoiMS4wIiwiYXBwTGVnYWwiOiJpY29uLnBuZyIsImRlc2NyaXB0aW9uIjoiVGhpcyBpcyBhIHdlYiBhcyBhbmQgd2lsbCB3b3JrIGluIHlvdXIgY2FzZSBvZiBpbmZvcm1hdGlvbnMuIiwiZG9tYWluIjoiZGVmYXVsdCIsIm9mZmltZXJhbGZhbGwiOiJBY3RpdmUgc3BvcmFvZnQgdGVjaC5yZW5vdyIsImNoYWxsZW5nZSI6ZmFsc2UsIm1vZGlmaWVkIjpmYWxzZX0=">
+
+  <!-- Web App Icon for Home Screen (iPad) -->
+  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJy4pM2G_0ViLxs6g-mq68YS7RRUv_XUHg4w&s" type="image/png">
+  <link rel="apple-touch-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJy4pM2G_0ViLxs6g-mq68YS7RRUv_XUHg4w&s" />
+  
+  <!-- iOS Meta Tags for Full-Screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Include Google API -->
+  <script src="https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.5oZHy0SiJxw.O/m=gapi_rpc/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-Hry6DG-RE4t9kNz_t6hiwmwXOmA/cb=gapi.loaded_0?le=scs" async></script>
+  <script src="https://apis.google.com/js/api.js?checkCookie=1" gapi_processed="true"></script>
+
+  <style>
+    body, html, iframe {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .forceIosScrolling {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Iframe to Load External Content -->
+  <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" frameborder="0" allowfullscreen src="https://23azostore.github.io/s8/snow-rider-3d/" style="overflow: auto;"></iframe>
+
+  <!-- JavaScript to handle Google API and iframe interactions -->
+  <script>
+    // Function to load game state from cookies or localStorage
+    function loadGameState() {
+      let gameState;
+      
+      // First try to load from cookies
+      const cookieGameState = getCookie("gameState");
+      if (cookieGameState) {
+        gameState = JSON.parse(cookieGameState);
+      } else {
+        // If no cookie, try loading from localStorage
+        const localStorageGameState = localStorage.getItem("gameState");
+        if (localStorageGameState) {
+          gameState = JSON.parse(localStorageGameState);
+        }
+      }
+
+      // If there's a saved state, apply it to the game
+      if (gameState) {
+        console.log("Loaded saved game state:", gameState);
+        // Here you would apply this game state to the game, depending on how your game handles this.
+      } else {
+        console.log("No saved game state found.");
+      }
+    }
+
+    // Function to save game state to cookies and localStorage
+    function saveGameState(state) {
+      // Save to cookie (expires in 30 days)
+      setCookie("gameState", JSON.stringify(state), 30);
+
+      // Save to localStorage
+      localStorage.setItem("gameState", JSON.stringify(state));
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Function to clear a cookie by name
+    function eraseCookie(name) {
+      document.cookie = name + "=; Max-Age=-99999999;";
+    }
+
+    // Simulating game state change (you can replace this with your game-specific state)
+    function simulateGameStateChange() {
+      const gameState = {
+        level: 5,
+        score: 1200,
+        lives: 3
+      };
+      console.log("Game state saved:", gameState);
+      saveGameState(gameState);
+    }
+
+    // Simulate loading game state on page load
+    window.onload = function() {
+      loadGameState();
+    };
+
+    // Example of game state change (triggered by some event)
+    // In your game, this would be triggered after a level up, scoring, or any other state change.
+    setTimeout(simulateGameStateChange, 5000);  // Simulate a state change after 5 seconds
+  </script>
+</body>
+</html>
