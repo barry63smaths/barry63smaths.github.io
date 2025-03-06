@@ -1,43 +1,56 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyTrack Game</title>
   <style>
-    /* Make sure the iframe fills the screen and runs smoothly */
-    body, html, iframe {
+    /* Full-screen setup */
+    body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       width: 100%;
       overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      background-color: #000;
     }
 
-    /* Enable hardware acceleration for smoother rendering */
+    /* Iframe styles for GPU acceleration and smooth performance */
     iframe {
-      transform: translate3d(0, 0, 0);
-      will-change: transform;
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: translate3d(0, 0, 0); /* GPU acceleration */
+      will-change: transform; /* Tell browser to optimize for changes */
+      background-color: #000;
+    }
+
+    /* Preventing scrolling within the iframe */
+    .forceIosScrolling {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
     }
   </style>
 </head>
-
 <body>
-  <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" frameborder="0" allowfullscreen="" src="https://raminvib27.github.io/polytrack-clone/" style="overflow: auto;">
-  </iframe>
+  <iframe id="innerFrame" name="innerFrame" src="https://raminvib27.github.io/polytrack-clone/" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" allowfullscreen="" frameborder="0"></iframe>
 
   <script>
-    // Function to set up a smooth animation loop with target FPS
     let lastFrameTime = 0;
     const targetFPS = 120;
     const targetInterval = 1000 / targetFPS;
 
     function updateFrame(time) {
+      // Only update if enough time has passed
       const timeDiff = time - lastFrameTime;
       if (timeDiff >= targetInterval) {
-        // Update the iframe if needed (e.g., trigger resize or adjust iframe properties)
-        // You can also pass messages to the iframe to update its content if possible
+        // Adjust iframe size or any other necessary actions
         adjustIframeSize();
 
+        // Update the last frame time
         lastFrameTime = time;
       }
 
@@ -47,15 +60,23 @@
 
     function adjustIframeSize() {
       const iframe = document.getElementById('innerFrame');
-      const height = iframe.contentWindow.document.body.scrollHeight;
-      iframe.style.height = height + 'px';
+      const body = iframe.contentWindow.document.body;
+
+      // Check and adjust iframe size based on content height if necessary
+      if (body) {
+        const contentHeight = body.scrollHeight;
+        const contentWidth = body.scrollWidth;
+
+        // Dynamically adjust iframe size to fit content
+        iframe.style.height = contentHeight + 'px';
+        iframe.style.width = contentWidth + 'px';
+      }
     }
 
-    // Start the animation loop once the page has fully loaded
-    window.onload = function() {
+    // Start the animation loop
+    window.onload = function () {
       requestAnimationFrame(updateFrame);
     };
-
   </script>
 </body>
 </html>
