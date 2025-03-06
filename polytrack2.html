@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A low-poly racing game with loops, jumps, and high speeds, where every millisecond counts.">
+    <meta property="og:title" content="PolyTrack">
+    <meta property="og:description" content="A low-poly racing game with loops, jumps, and high speeds, where every millisecond counts.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.kodub.com/apps/polytrack">
+    <meta property="og:image" content="https://www.kodub.com/apps/polytrack/image">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KodubDev">
+    <title>PolyTrack</title>
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/favicon-192x192.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="/favicon/favicon-167x167.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/favicon/favicon-180x180.png">
+
+    <style>
+        /* Full-screen layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Make the iframe fill the entire screen */
+        #game-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @font-face {
+            font-family: 'mediumText';
+            src: url('chrome-extension://jcmcbmdmfmelmlelagelpfhmohipjjia/Inter-Medium.woff2') format('woff2'),
+                url('chrome-extension://jcmcbmdmfmelmlelagelpfhmohipjjia/Inter-Medium.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'defaultText';
+            src: url('chrome-extension://jcmcbmdmfmelmlelagelpfhmohipjjia/Inter-Regular.woff2') format('woff2'),
+                url('chrome-extension://jcmcbmdmfmelmlelagelpfhmohipjjia/Inter-Regular.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'boldText';
+            src: url('chrome-extension://jcmcbmdmfmelmlelagelpfhmohipjjia/Inter-Bold.woff2') format('woff2'),
+                url('chrome-extension://jcmcbmdmfmelmlelagelpfhmohipjjia/Inter-Bold.woff') format('woff');
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+        Error: JavaScript is not supported.
+    </noscript>
+
+    <!-- The div that will contain the game iframe -->
+    <div id="game-container"></div>
+
+    <script>
+        // Function to load the external game content dynamically
+        function loadGame() {
+            var container = document.getElementById("game-container");
+
+            // Creating an iframe dynamically
+            var iframe = document.createElement("iframe");
+            iframe.src = "https://app-polytrack.kodub.com/0.4.2/?";
+            iframe.width = "100%";
+            iframe.height = "100%";
+            iframe.style.border = "none";
+            iframe.sandbox = "allow-scripts allow-same-origin allow-top-navigation allow-popups allow-popups-to-escape-sandbox allow-pointer-lock allow-downloads";
+            iframe.allow = "autoplay;fullscreen;vr;xr-spatial-tracking;clipboard-write";
+
+            // Append the iframe to the container
+            container.appendChild(iframe);
+
+            // Ensure the iframe gets focus after it loads
+            iframe.onload = function () {
+                iframe.focus();
+            };
+        }
+
+        // Load the game after the DOM is fully loaded
+        window.onload = loadGame;
+    </script>
+
+    <div id="zyft-extension-root" class="zyft-extension-root">
+        <div id="zyft-extension__shadow-root" class="zyft-extension__shadow-root"></div>
+    </div>
+</body>
+
+</html>
