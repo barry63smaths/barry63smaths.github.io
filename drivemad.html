@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <title>Optimized Game</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: translate3d(0, 0, 0); /* Enable GPU acceleration */
+      will-change: transform; /* Optimizes rendering for 3D transforms */
+    }
+  </style>
+</head>
+
+<body>
+  <iframe id="innerFrame" name="innerFrame" 
+    sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" 
+    frameborder="0" allowfullscreen="" 
+    src="https://somuchmath.global.ssl.fastly.net/projects/drive-mad/index.html" 
+    style="overflow: auto;">
+  </iframe>
+
+  <script>
+    // Function to resize the canvas inside the iframe
+    function resizeCanvasInIframe() {
+      const iframe = document.getElementById('innerFrame');
+      const iframeWindow = iframe.contentWindow;
+      const iframeDocument = iframe.contentDocument || iframeWindow.document;
+
+      // Check if the canvas element exists
+      const canvas = iframeDocument.querySelector('canvas');
+
+      if (canvas) {
+        const iframeWidth = iframe.offsetWidth;
+        const iframeHeight = iframe.offsetHeight;
+
+        // Set canvas size to match the iframe size
+        canvas.width = iframeWidth;
+        canvas.height = iframeHeight;
+
+        // If the game uses a game loop (like requestAnimationFrame), it should adjust to the new size.
+        const resizeEvent = new Event('resize');
+        iframeWindow.dispatchEvent(resizeEvent);
+      }
+    }
+
+    // Wait for the iframe content to be fully loaded before adjusting the canvas size
+    document.getElementById('innerFrame').addEventListener('load', function() {
+      // Resize the canvas after loading the iframe content
+      resizeCanvasInIframe();
+    });
+
+    // Resize the canvas whenever the window resizes
+    window.addEventListener('resize', function () {
+      resizeCanvasInIframe();
+    });
+  </script>
+</body>
+</html>

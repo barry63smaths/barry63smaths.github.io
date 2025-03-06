@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Optimized Game for iPad</title>
+  <style>
+    /* Ensuring that the body and html take full height and width */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Ensuring smooth scrolling on iOS */
+    .forceIosScrolling {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Set iframe to fill the whole screen */
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+
+  <script src="https://apis.google.com/js/api.js?checkCookie=1" gapi_processed="true"></script>
+
+</head>
+
+<body>
+
+<!-- Embed the game in an iframe -->
+<iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" allowfullscreen="" src="https://somuchmath.global.ssl.fastly.net/projects/learntofly/index.html" class="forceIosScrolling"></iframe>
+
+<script>
+  // Load the Google API for functionality
+  function loadGapi() {
+    var loaderScript = document.createElement('script');
+    loaderScript.setAttribute('src', 'https://apis.google.com/js/api.js?checkCookie=1');
+    loaderScript.onload = function() {
+      this.onload = function() {};
+      loadGapiClient();
+    };
+    loaderScript.onreadystatechange = function() {
+      if(this.readyState === 'complete') {
+        this.onload();
+      }
+    };
+    (document.head || document.body || document.documentElement).appendChild(loaderScript);
+  }
+
+  // Function to update iframe with new URL
+  function updateInnerFrame(url, enableInteraction, forceIosScrolling) {
+    var urlEl = document.createElement('a');
+    urlEl.setAttribute('href', url);
+    if (urlEl.protocol != "https:" && urlEl.protocol != "http:") {
+      return;
+    }
+
+    var iframe = document.getElementById('innerFrame');
+    iframe.src = url;
+
+    iframe.onload = function() {
+      gapi.rpc.call('..', 'innerFrameLoaded');
+    };
+
+    if (enableInteraction) {
+      if (forceIosScrolling) {
+        var iframeParent = iframe.parentElement;
+        iframeParent.classList.add('forceIosScrolling');
+      } else {
+        iframe.style.overflow = 'auto';
+      }
+    } else {
+      iframe.style.pointerEvents = 'none';
+    }
+  }
+
+  // Function to handle communication with the iframe
+  function onPostMessage(ev) {
+    if (ev

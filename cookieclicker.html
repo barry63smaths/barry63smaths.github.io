@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <title>Optimized Cookie Clicker Game</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: translate3d(0, 0, 0); /* Enable GPU acceleration */
+      will-change: transform; /* Optimizes rendering for 3D transforms */
+    }
+
+    /* Force iOS scrolling */
+    .forceIosScrolling {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+  <script src="https://apis.google.com/js/api.js?checkCookie=1" gapi_processed="true"></script>
+</head>
+
+<body contenteditable="false">
+  <iframe id="innerFrame" name="innerFrame" 
+    sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" 
+    frameborder="0" allowfullscreen="" 
+    src="https://somuchmath.global.ssl.fastly.net/projects/cookie-clicker/index.html" 
+    style="overflow: auto;">
+  </iframe>
+
+  <script>
+    // This function will manage smooth rendering and ensure we only update at 60 FPS
+    let lastFrameTime = 0;
+    const targetFPS = 60;  // Aim for 60 FPS to reduce resource strain on iPad
+    const targetInterval = 1000 / targetFPS;
+    let frameRequestId;
+
+    // Adjust iframe size dynamically to ensure responsiveness
+    function adjustIframeSize() {
+      const iframe = document.getElementById('innerFrame');
+      const iframeWindow = iframe.contentWindow;
+
+      // Post a message to iframe to get its dimensions (if necessary)
+      iframeWindow.postMessage({ magic: 'SHIC', type: 'getDimensions' }, '*');
+    }
+
+    // Handle resize messages from the iframe
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.magic === 'SHIC' && event.data.type === 'resize') {
+        const iframe = document.getElementById('innerFrame');
+        const { width, height } = event.data;
+        iframe.style.width = `${width}px`;
+        iframe.style.height = `${height}px`;
+      }
+    });
+
+    // Smooth rendering loop to ensure frame rate is steady
+    function smoothRender() {
+      const now = Date.now();
+      const timeSinceLastFrame = now - lastFrameTime;
+
+      if (timeSinceLastFrame >= targetInterval) {
+        lastFrameTime = now;
+        adjustIframeSize(); // Ensure the iframe size is adjusted
+      }
+
+      frameRequestId = requestAnimationFrame(smoothRender); // Continue to call this function for smooth rendering
+    }
+
+    // Start the rendering loop to maintain smooth FPS
+    smoothRender();
+
+    // Adjust iframe size on window resize to ensure it's responsive
+    window.addEventListener('resize', adjustIframeSize);
+
+    // Optimize touch interactions and prevent default touch events
+    document.body.addEventListener('touchstart', function(event) {
+      event.preventDefault();  // Prevent default touch actions to optimize performance
+    }, { passive: true });
+  </script>
+</body>
+</html>
