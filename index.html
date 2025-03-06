@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0DW0ZG97K"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-Z0DW0ZG97K');
     </script>
 
@@ -18,7 +16,6 @@
     <meta name="apple-mobile-web-app-title" content="Barry 63 Fullscreen">
     <meta name="theme-color" content="#000000">
 
-    <!-- App Icon -->
     <link rel="apple-touch-icon" href="https://avatars.cloudflare.steamstatic.com/8508f3bec17102cdbbc768b4184ace4ae42d3756_full.jpg">
     <link rel="icon" type="image/png" sizes="192x192" href="https://avatars.cloudflare.steamstatic.com/8508f3bec17102cdbbc768b4184ace4ae42d3756_full.jpg">
     <link rel="icon" type="image/png" sizes="512x512" href="https://avatars.cloudflare.steamstatic.com/8508f3bec17102cdbbc768b4184ace4ae42d3756_full.jpg">
@@ -40,15 +37,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: auto; /* Allow scrolling */
+            overflow: auto; /* Allow scrolling only on the homepage */
             position: relative;
             background-color: #1a1a1a;
         }
 
-        /* Background container */
         .container {
             width: 100%;
-            height: 200%; /* Increase the height to 200% to make it longer */
+            height: 200%; /* Make the background longer */
             background: repeating-conic-gradient(
                     from 30deg,
                     #0000 0 120deg,
@@ -68,7 +64,6 @@
             z-index: 1;
         }
 
-        /* Content Box */
         .content {
             text-align: center;
             z-index: 2;
@@ -258,105 +253,44 @@
         <button onclick="startGame('./run3.html');"><span>Run 3 Fullscreen</span></button>
         <button onclick="startGame('./slope.html');"><span>Slope Fullscreen</span></button>
         <button onclick="startGame('./driftboss.html');"><span>Drift boss Fullscreen</span></button>
-        <button onclick="startGame('./cookieclicker.html');"><span>Cookie clickerFullscreen</span></button>
-        <button onclick="startGame('./drivemad.html');"><span>Drive mad Fullscreen</span></button>
-        <button onclick="startGame('./stickmanhook.html');"><span>Stickman hook Fullscreen</span></button>
-        <button onclick="startGame('./basketballrandom.html');"><span>Basketball random Fullscreen</span></button>
-        <button onclick="startGame('./learntofly.html');"><span>Learn to fly Fullscreen</span></button>
+        <button onclick="startGame('./goodgame.html');"><span>Goodgame Fullscreen</span></button>
     </div>
 
-    <!-- Game Iframe -->
-    <iframe id="game-frame"></iframe>
-
-    <!-- Cookie Consent Box -->
-    <div id="cookie-consent" class="cookie-consent" style="display:none;">
-        This website uses cookies to save your game progress. By clicking "Accept", you agree to the use of cookies.
-        <br><button onclick="acceptCookies();">Accept</button>
+    <!-- Cookie Consent -->
+    <div class="cookie-consent">
+        <p>We use cookies to ensure the best experience. By continuing, you accept our <a href="#">privacy policy</a>.</p>
+        <button onclick="acceptCookies()">I Accept</button>
     </div>
+
+    <!-- Game iframe -->
+    <iframe id="gameIframe" src=""></iframe>
 
     <script>
-        // Functions for Cookie Consent
-        function checkCookieConsent() {
-            const cookiesAccepted = getCookie("cookiesAccepted");
-            if (!cookiesAccepted) {
-                document.getElementById('cookie-consent').style.display = 'block';
-            }
-        }
+        // Function to start a game (open in fullscreen iframe)
+        function startGame(url) {
+            // Reset scroll position
+            window.scrollTo(0, 0);
 
-        function acceptCookies() {
-            setCookie("cookiesAccepted", "true", 365);
-            document.getElementById('cookie-consent').style.display = 'none';
-        }
-
-        // Cookie Helper Functions
-        function setCookie(cname, cvalue, exdays) {
-            let d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires=" + d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
-
-        function getCookie(cname) {
-            let name = cname + "=";
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-
-        // Start the game in an iframe
-        function startGame(gameUrl) {
-            let iframe = document.getElementById('game-frame');
-            if (!iframe) {
-                iframe = document.createElement('iframe');
-                iframe.id = 'game-frame';
-                iframe.style.display = 'block';
-                iframe.style.width = '100vw';
-                iframe.style.height = '100vh';
-                iframe.style.border = 'none';
-                iframe.style.position = 'absolute';
-                iframe.style.top = '0';
-                iframe.style.left = '0';
-                iframe.style.zIndex = '2';
-                document.body.appendChild(iframe);
-            }
-
-            const content = document.querySelector('.content');
-            const backTab = document.querySelector('.back-tab');
-
-            content.style.display = 'none';
-            iframe.src = gameUrl;
+            document.querySelector('.content').style.display = 'none'; // Hide content
+            document.querySelector('.cookie-consent').style.display = 'none'; // Hide cookie consent
+            var iframe = document.getElementById('gameIframe');
+            iframe.src = url;
             iframe.style.display = 'block';
-            backTab.style.display = 'flex';
-
-            // Disable scroll when game is open
-            document.body.style.overflow = 'hidden';
         }
 
-        // Close the game and show the home menu again
+        // Function to close the game and go back to the homepage
         function closeGame() {
-            const iframe = document.getElementById('game-frame');
-            const content = document.querySelector('.content');
-            const backTab = document.querySelector('.back-tab');
-
+            document.querySelector('.content').style.display = 'block'; // Show content
+            document.querySelector('.cookie-consent').style.display = 'block'; // Show cookie consent
+            var iframe = document.getElementById('gameIframe');
+            iframe.src = ''; // Stop the game
             iframe.style.display = 'none';
-            content.style.display = 'block';
-            backTab.style.display = 'none';
-
-            // Enable scroll when game is closed
-            document.body.style.overflow = 'auto';
         }
 
-        // Initialize Cookie Consent
-        checkCookieConsent();
+        // Cookie consent handling
+        function acceptCookies() {
+            document.querySelector('.cookie-consent').style.display = 'none';
+        }
     </script>
 </body>
 </html>
