@@ -146,7 +146,6 @@
             }
         }
 
-        /* Back Button (Floating Tab) */
         .back-tab {
             position: fixed;
             top: 20px;
@@ -174,7 +173,6 @@
             margin-left: 5px;
         }
 
-        /* Full-Screen Game Iframe */
         iframe {
             display: none;
             width: 100vw;
@@ -186,7 +184,6 @@
             z-index: 2;
         }
 
-        /* Cookie Consent Styles */
         .cookie-consent {
             position: fixed;
             bottom: 0;
@@ -209,7 +206,6 @@
             cursor: pointer;
         }
 
-        /* Responsive Design Adjustments */
         @media (max-width: 600px) {
             .content {
                 padding: 10px;
@@ -233,15 +229,12 @@
     </style>
 </head>
 <body>
-    <!-- Background container -->
     <div class="container"></div>
 
-    <!-- Back Button Tab -->
     <div class="back-tab" onclick="closeGame()">
         ← <span>Back</span>
     </div>
 
-    <!-- Main Content -->
     <div class="content">
         <h1>Barry 63 Fullscreen</h1>
 
@@ -253,41 +246,40 @@
         <button onclick="startGame('./run3.html');"><span>Run 3 Fullscreen</span></button>
         <button onclick="startGame('./slope.html');"><span>Slope Fullscreen</span></button>
         <button onclick="startGame('./driftboss.html');"><span>Drift boss Fullscreen</span></button>
-        <button onclick="startGame('./goodgame.html');"><span>Goodgame Fullscreen</span></button>
+        <button onclick="startGame('./cookieclicker.html');"><span>Cookie clickerFullscreen</span></button>
+        <button onclick="startGame('./drivemad.html');"><span>Drive mad Fullscreen</span></button>
+        <button onclick="startGame('./stickmanhook.html');"><span>Stickman hook Fullscreen</span></button>
+        <button onclick="startGame('./basketballrandom.html');"><span>Basketball random Fullscreen</span></button>
+        <button onclick="startGame('./learntofly.html');"><span>Learn to fly Fullscreen</span></button>
     </div>
 
-    <!-- Cookie Consent -->
     <div class="cookie-consent">
-        <p>We use cookies to ensure the best experience. By continuing, you accept our <a href="#">privacy policy</a>.</p>
+        <p>We use cookies to ensure the best experience. By continuing, you accept that we use cookies on our site</p>
         <button onclick="acceptCookies()">I Accept</button>
     </div>
 
-    <!-- Game iframe -->
     <iframe id="gameIframe" src=""></iframe>
 
     <script>
-        // Function to start a game (open in fullscreen iframe)
         function startGame(url) {
-            // Reset scroll position
-            window.scrollTo(0, 0);
-
-            document.querySelector('.content').style.display = 'none'; // Hide content
-            document.querySelector('.cookie-consent').style.display = 'none'; // Hide cookie consent
+            window.scrollTo(0, 0);  // Scroll to the top of the page
+            document.body.style.overflow = 'hidden';  // Disable scrolling
+            document.querySelector('.content').style.display = 'none';
+            document.querySelector('.cookie-consent').style.display = 'none';
             var iframe = document.getElementById('gameIframe');
             iframe.src = url;
             iframe.style.display = 'block';
         }
 
-        // Function to close the game and go back to the homepage
         function closeGame() {
-            document.querySelector('.content').style.display = 'block'; // Show content
-            document.querySelector('.cookie-consent').style.display = 'block'; // Show cookie consent
+            document.body.style.overflow = 'auto';  // Enable scrolling
+            document.querySelector('.content').style.display = 'block';
+            document.querySelector('.cookie-consent').style.display = 'block';
             var iframe = document.getElementById('gameIframe');
-            iframe.src = ''; // Stop the game
+            iframe.src = '';
             iframe.style.display = 'none';
         }
 
-        // Cookie consent handling
         function acceptCookies() {
             document.querySelector('.cookie-consent').style.display = 'none';
         }
