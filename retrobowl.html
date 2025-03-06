@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <title>Game on iPad Safari</title>
+  <style>
+    /* Full-screen setup for the iframe, tailored for iPad */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: translate3d(0, 0, 0); /* GPU acceleration */
+      will-change: transform; /* Hints to browser that it should optimize for 3D rendering */
+    }
+
+    /* Force iOS scrolling */
+    .forceIosScrolling {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="innerFrame" name="innerFrame" 
+    sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads allow-storage-access-by-user-activation" 
+    frameborder="0" allowfullscreen="" 
+    src="https://somuchmath.global.ssl.fastly.net/projects/retro-bowl/index.html" 
+    style="overflow: auto;">
+  </iframe>
+
+  <script>
+    // Frame rate control
+    let lastFrameTime = 0;
+    const targetFPS = 60;  // Target 60 FPS for mobile (iPad Safari)
+    const targetInterval = 1000 / targetFPS;
+    let frameRequestId;
+
+    // Function to adjust iframe size and maintain smoothness on iPad
+    function adjustIframeSize() {
+      const iframe = document.getElementById('innerFrame');
+      const iframeWindow = iframe.contentWindow;
+
+      // Post a message to iframe to get its dimensions (if necessary)
+      iframeWindow.postMessage({ magic: 'SHIC', type: 'getDimensions' }, '*');
+    }
+
+    // Handle communication between the parent window and iframe
+    window.addEventListener('message', function (event) {
+      if (event.data && event.data.magic === 'SHIC' && event.data.type === 'resize') {
+        const iframe = document.getElementById('innerFrame');
+        const { width, height } = event.data;
+        iframe.style.width = `${width}px`;
+        iframe.style.height = `${height}px`;
+      }
+    });
+
+    // Optimized function to control the frame rate and smooth rendering
+    function smoothRender() {
+      const now = Date.now();
+      const timeSinceLastFrame = now - lastFrameTime;
+
+      if (timeSinceLastFrame >= targetInterval) {
+        lastFrameTime = now;
+        adjustIframeSize(); // Adjust iframe size if necessary (can be omitted if not needed)
+      }
+
+      frameRequestId = requestAnimationFrame(smoothRender); // Keep calling the function for smooth updates
+    }
+
+    // Start the smooth rendering loop
+    smoothRender();
+
+    // Adjust iframe size on window resize (for responsiveness)
+    window.addEventListener('resize', adjustIframeSize);
+
+    // Optimize touch interactions and prevent unnecessary default actions
+    document.body.addEventListener('touchstart', function(event) {
+      event.preventDefault();  // Prevent default actions to optimize performance
+    }, { passive: true });
+  </script>
+</body>
+</html>
