@@ -23,13 +23,12 @@
     <title>Barry 63 Fullscreen</title>
 
     <style>
-        /* Global Reset and Layout */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -37,27 +36,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: auto; /* Allow scrolling only on the homepage */
             position: relative;
             background-color: #1a1a1a;
+            overflow: auto;
         }
 
         .container {
             width: 100%;
-            height: 200%; /* Make the background longer */
+            height: 200%;
             background: repeating-conic-gradient(
-                    from 30deg,
-                    #0000 0 120deg,
-                    #3c3c3c 0 180deg
-                )
-                calc(0.5 * 200px) calc(0.5 * 200px * 0.577),
+                from 30deg,
+                #0000 0 120deg,
+                #3c3c3c 0 180deg
+            ) calc(0.5 * 200px) calc(0.5 * 200px * 0.577),
             repeating-conic-gradient(
                 from 30deg,
                 #1d1d1d 0 60deg,
                 #4e4f51 0 120deg,
                 #3c3c3c 0 180deg
             );
-            background-size: 200px calc(200px * 0.577);
             position: absolute;
             top: 0;
             left: 0;
@@ -101,78 +98,6 @@
             transition: all 0.3s ease-in-out;
         }
 
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: skewX(-45deg);
-            transition: all 0.6s ease-in-out;
-        }
-
-        button:hover::before {
-            left: 100%;
-        }
-
-        button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        button span {
-            position: relative;
-            z-index: 1;
-            animation: bounceText 0.3s ease-in-out;
-        }
-
-        button:hover span {
-            animation: bounceText 0.6s ease-in-out;
-        }
-
-        @keyframes bounceText {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        .back-tab {
-            position: fixed;
-            top: 20px;
-            left: -80px;
-            width: 100px;
-            height: 40px;
-            background: #333;
-            color: white;
-            font-size: 1em;
-            font-weight: bold;
-            border-radius: 5px 0 0 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease-in-out;
-            z-index: 3;
-        }
-
-        .back-tab:hover {
-            left: 0;
-        }
-
-        .back-tab span {
-            margin-left: 5px;
-        }
-
         iframe {
             display: none;
             width: 100vw;
@@ -206,6 +131,34 @@
             cursor: pointer;
         }
 
+        /* Back button styles (same as the old one) */
+        .back-tab {
+            position: fixed;
+            top: 20px;
+            left: -80px;
+            width: 100px;
+            height: 40px;
+            background: #333;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 5px 0 0 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-in-out;
+            z-index: 3;
+        }
+
+        .back-tab:hover {
+            left: 0;
+        }
+
+        .back-tab span {
+            margin-left: 5px;
+        }
+
         @media (max-width: 600px) {
             .content {
                 padding: 10px;
@@ -231,6 +184,7 @@
 <body>
     <div class="container"></div>
 
+    <!-- Back Button (same as old one) -->
     <div class="back-tab" onclick="closeGame()">
         ← <span>Back</span>
     </div>
@@ -253,35 +207,71 @@
         <button onclick="startGame('./learntofly.html');"><span>Learn to fly Fullscreen</span></button>
     </div>
 
-    <div class="cookie-consent">
-        <p>We use cookies to ensure the best experience. By continuing, you accept that we use cookies on our site</p>
+    <div class="cookie-consent" id="cookieConsent">
+        <p>We use cookies to ensure the best experience. By continuing, you accept that we use cookies on our site.</p>
         <button onclick="acceptCookies()">I Accept</button>
     </div>
 
     <iframe id="gameIframe" src=""></iframe>
 
     <script>
-        function startGame(url) {
-            window.scrollTo(0, 0);  // Scroll to the top of the page
-            document.body.style.overflow = 'hidden';  // Disable scrolling
-            document.querySelector('.content').style.display = 'none';
-            document.querySelector('.cookie-consent').style.display = 'none';
-            var iframe = document.getElementById('gameIframe');
-            iframe.src = url;
-            iframe.style.display = 'block';
-        }
-
-        function closeGame() {
-            document.body.style.overflow = 'auto';  // Enable scrolling
-            document.querySelector('.content').style.display = 'block';
-            document.querySelector('.cookie-consent').style.display = 'block';
-            var iframe = document.getElementById('gameIframe');
-            iframe.src = '';
-            iframe.style.display = 'none';
+        // Check if the user has accepted cookies
+        if (getCookie('cookieAccepted') === 'true') {
+            document.getElementById('cookieConsent').style.display = 'none';
         }
 
         function acceptCookies() {
-            document.querySelector('.cookie-consent').style.display = 'none';
+            setCookie('cookieAccepted', 'true', 365);  // Set the cookie for 1 year
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+
+        function setCookie(name, value, days) {
+            var expires = '';
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/';
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Lock scroll and show iframe
+        function startGame(url) {
+            window.scrollTo(0, 0);  // Scroll to the top of the page
+            document.body.style.position = 'fixed';  // Lock body scroll
+            document.body.style.top = '0';
+            document.body.style.left = '0';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+            document.body.style.overflow = 'hidden';  // Disable scrolling
+            document.querySelector('.content').style.display = 'none';  // Hide content
+            document.querySelector('.cookie-consent').style.display = 'none';  // Hide cookie consent
+            var iframe = document.getElementById('gameIframe');
+            iframe.src = url;
+            iframe.style.display = 'block';
+            document.querySelector('.back-tab').style.display = 'block';  // Show back button
+        }
+
+        function closeGame() {
+            document.body.style.position = '';  // Reset body position
+            document.body.style.overflow = '';  // Re-enable scrolling
+            document.querySelector('.content').style.display = 'block';  // Show content
+            document.querySelector('.cookie-consent').style.display = '';  // Show cookie consent
+            var iframe = document.getElementById('gameIframe');
+            iframe.src = '';  // Remove iframe src
+            iframe.style.display = 'none';  // Hide iframe
+            document.querySelector('.back-tab').style.display = 'none';  // Hide back button
         }
     </script>
 </body>
