@@ -225,6 +225,22 @@
                 font-size: 0.9em;
             }
         }
+
+        /* Position the new "Open About:Blank" button in the top-right corner */
+        .about-blank-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -252,7 +268,6 @@
         <button onclick="startGame('./basketballrandom.html');"><span>Basketball random Fullscreen</span></button>
         <button onclick="startGame('./learntofly.html');"><span>Learn to fly Fullscreen</span></button>
         <button onclick="startGame('./learntofly2.html');"><span>Learn to fly 2 Fullscreen</span></button>
-
     </div>
 
     <div class="cookie-consent" id="cookieConsent" style="display: none;">
@@ -261,6 +276,9 @@
     </div>
 
     <iframe id="gameIframe" src=""></iframe>
+
+    <!-- About:Blank button -->
+    <button class="about-blank-button" onclick="openCurrentInBlank()">Open in About:Blank</button>
 
     <script>
         // Check if the user has accepted cookies
@@ -282,6 +300,7 @@
             iframe.src = url;
             iframe.style.display = 'block';
             document.querySelector('.back-tab').style.display = 'block';  // Show the back button
+            document.querySelector('.about-blank-button').style.display = 'none';  // Hide the About:Blank button
         }
 
         function closeGame() {
@@ -291,6 +310,16 @@
             iframe.src = '';
             iframe.style.display = 'none';
             document.querySelector('.back-tab').style.display = 'none';  // Hide the back button
+            document.querySelector('.about-blank-button').style.display = 'block';  // Show the About:Blank button again
+        }
+
+        // Function to open the current window in an "about:blank" window and copy the content
+        function openCurrentInBlank() {
+            var newWindow = window.open('about:blank', '_blank');
+            var currentContent = document.documentElement.outerHTML;  // Get current page content
+            newWindow.document.open();
+            newWindow.document.write(currentContent);  // Write current content into the blank page
+            newWindow.document.close();
         }
     </script>
 </body>
