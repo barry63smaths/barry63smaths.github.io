@@ -177,7 +177,6 @@
             cursor: pointer;
         }
 
-        /* Back button styles (same as the old one) */
         .back-tab {
             position: fixed;
             top: 20px;
@@ -226,7 +225,6 @@
             }
         }
 
-        /* Position the new "Open About:Blank" button in the top-right corner */
         .about-blank-button {
             position: fixed;
             top: 20px;
@@ -246,17 +244,14 @@
 <body>
     <div class="container"></div>
 
-    <!-- Back Button (same as old one) -->
     <div class="back-tab" onclick="closeGame()" style="display: none;">
         ← <span>Back</span>
     </div>
 
     <div class="content">
-        <h1>Barry 63 Fullscreen</h1>
+        <h1>oli fullscreen</h1>
 
-        <button onclick="startGame('./polytrack.html');"><span>Polytrack 0.2.0 Fullscreen</span></button>
-        <button onclick="startGame('./polytrack_server2.html');"><span>Polytrack (Server 2) Fullscreen</span></button>
-        <button onclick="startGame('./polytrack2.html');"><span>Polytrack 0.4.1 testing</span></button>
+        <button onclick="startGame('./polytrack2.html');"><span>Polytrack 0.4.1 fullscreen</span></button>
         <button onclick="startGame('./ovo.html');"><span>OvO Fullscreen</span></button>
         <button onclick="startGame('./snowrider.html');"><span>Snow Rider Fullscreen</span></button>
         <button onclick="startGame('./run3.html');"><span>Run 3 Fullscreen</span></button>
@@ -277,7 +272,6 @@
 
     <iframe id="gameIframe" src=""></iframe>
 
-    <!-- About:Blank button -->
     <button class="about-blank-button" onclick="openCurrentInBlank()">Open in About:Blank</button>
 
     <script>
@@ -287,38 +281,42 @@
         }
 
         function acceptCookies() {
-            localStorage.setItem("cookiesAccepted", "true");  // Store in localStorage
+            localStorage.setItem("cookiesAccepted", "true");
             document.getElementById("cookieConsent").style.display = 'none';
         }
 
         function startGame(url) {
-            window.scrollTo(0, 0);  // Scroll to the top of the page
-            document.body.style.overflow = 'hidden';  // Disable scrolling
+            window.scrollTo(0, 0); // Scroll to the top
+            document.body.style.overflow = 'hidden'; // Lock scroll
             document.querySelector('.content').style.display = 'none';
             document.querySelector('.cookie-consent').style.display = 'none';
             var iframe = document.getElementById('gameIframe');
             iframe.src = url;
             iframe.style.display = 'block';
-            document.querySelector('.back-tab').style.display = 'block';  // Show the back button
-            document.querySelector('.about-blank-button').style.display = 'none';  // Hide the About:Blank button
+            iframe.style.position = 'fixed'; // Center iframe on screen
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100vw';
+            iframe.style.height = '100vh';
+            document.querySelector('.back-tab').style.display = 'block';
+            document.querySelector('.about-blank-button').style.display = 'none';
         }
 
         function closeGame() {
-            document.body.style.overflow = 'auto';  // Enable scrolling
+            document.body.style.overflow = 'auto'; // Enable scroll again
             document.querySelector('.content').style.display = 'block';
             var iframe = document.getElementById('gameIframe');
             iframe.src = '';
             iframe.style.display = 'none';
-            document.querySelector('.back-tab').style.display = 'none';  // Hide the back button
-            document.querySelector('.about-blank-button').style.display = 'block';  // Show the About:Blank button again
+            document.querySelector('.back-tab').style.display = 'none';
+            document.querySelector('.about-blank-button').style.display = 'block';
         }
 
-        // Function to open the current window in an "about:blank" window and copy the content
         function openCurrentInBlank() {
             var newWindow = window.open('about:blank', '_blank');
-            var currentContent = document.documentElement.outerHTML;  // Get current page content
+            var currentContent = document.documentElement.outerHTML;
             newWindow.document.open();
-            newWindow.document.write(currentContent);  // Write current content into the blank page
+            newWindow.document.write(currentContent);
             newWindow.document.close();
         }
     </script>
