@@ -4,23 +4,22 @@
   <meta charset="UTF-8">
   <title>Case Clicker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
-  <!-- iOS/iPadOS PWA Metadata -->
+
+  <!-- iOS/iPadOS Web App Support -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="CaseClicker">
   <link rel="apple-touch-icon" href="csgo.png">
 
-  <!-- Inline Manifest -->
+  <!-- Manifest (inline base64 for all-in-one index.html) -->
   <link rel="manifest" href="data:application/manifest+json,{
-    &quot;name&quot;: &quot;CaseClicker&quot;,
+    &quot;name&quot;: &quot;Case Clicker&quot;,
     &quot;short_name&quot;: &quot;Clicker&quot;,
     &quot;start_url&quot;: &quot;.&quot;,
     &quot;display&quot;: &quot;standalone&quot;,
     &quot;background_color&quot;: &quot;#000000&quot;,
     &quot;theme_color&quot;: &quot;#000000&quot;,
-    &quot;orientation&quot;: &quot;portrait&quot;,
     &quot;icons&quot;: [
       {
         &quot;src&quot;: &quot;csgo.png&quot;,
@@ -29,32 +28,6 @@
       }
     ]
   }">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      text-align: center;
-      background-color: #111;
-      color: #fff;
-    }
-    #money {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    button {
-      font-size: 20px;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #3498db;
-      color: white;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-  </style>
 </head>
 <body>
   <h1>Case Clicker</h1>
@@ -104,7 +77,6 @@
       updateDisplay();
     }
 
-    // Give starting cash
     money = 10;
     updateDisplay();
   </script>
