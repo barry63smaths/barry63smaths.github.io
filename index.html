@@ -239,6 +239,33 @@
             cursor: pointer;
             z-index: 10;
         }
+
+        /* Paid sponsor button red styles */
+        .paid-sponsor-btn {
+            background-color: #ff0000 !important;  /* solid red */
+            color: white !important;
+            border: none !important;
+            box-shadow: none !important;
+            font-weight: bold;
+            padding: 15px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 15px auto;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .paid-sponsor-btn::before {
+            display: none !important;  /* remove green gradient shine */
+        }
+
+        .paid-sponsor-btn:hover {
+            background-color: #cc0000 !important; /* darker red on hover */
+        }
     </style>
 </head>
 <body>
@@ -249,8 +276,13 @@
     </div>
 
     <div class="content">
-        <h1>new link coming soon, check up</h1>
-        <button onclick="startGame('./paidsponsor.html');"><span>Paid sponsor</br>of Barry 63's games</span></button>
+        <h1>new link coming soon, check updates</h1>
+
+        <!-- Paid Sponsor button opens paidsponsor.html in new tab -->
+        <button class="paid-sponsor-btn" onclick="window.open('paidsponsor.html', '_blank')">
+            <span>Paid sponsor<br>of Barry 63's games</span>
+        </button>
+
         <button onclick="startGame('./Updates.html');"><span>recent updates</span></button>
         <button onclick="startGame('./polytrack2.html');"><span>Polytrack 0.4.1</span></button>
         <button onclick="startGame('./ovo.html');"><span>OvO</span></button>
@@ -270,8 +302,6 @@
         <button onclick="startGame('./basketballrandom.html');"><span>Basketball random</span></button>
         <button onclick="startGame('./soccerrandom.html');"><span>soccer random</span></button>
         <button onclick="startGame('./geometrydash.html');"><span>geometry dash</span></button>
-        
-
     </div>
 
     <div class="cookie-consent" id="cookieConsent" style="display: none;">
