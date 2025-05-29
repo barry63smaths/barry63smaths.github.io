@@ -153,48 +153,23 @@
         }
 
         button {
-            display: block;
             width: 100%;
             max-width: 300px;
-            padding: 15px;
-            margin: 15px auto;
+            padding: 20px;
             font-size: 1em;
-            font-weight: bold;
+            background-color: rgb(55, 255, 72);
+            border: 0px;
+            border-radius: 5px;
+            transition: transform 0.3s ease, border-radius 0.5s ease;
+            font-weight: 700;
             color: white;
-            background: linear-gradient(90deg, #32CD32, #7FFF00);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: skewX(-45deg);
-            transition: all 0.6s ease-in-out;
-        }
-
-        button:hover::before {
-            left: 100%;
+            margin-bottom: 15px; /* Added spacing between green buttons */
         }
 
         button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            background-color: rgb(48, 201, 61);
+            transform: translateY(5px); 
+            border-radius: 30px;
         }
 
         button span {
@@ -340,86 +315,7 @@
             background-size: cover;
         }
 
-        .preview.background1 {
-            --s: 20px;
-            --c1: #f2f2f2;
-            --c2: #cdcbcc;
-            --c3: #999999;
-            --_g: 0 120deg, #0000 0;
-            background: conic-gradient(
-                from 0deg at calc(500% / 6) calc(100% / 3),
-                var(--c3) var(--_g)
-            ),
-            conic-gradient(
-                from -120deg at calc(100% / 6) calc(100% / 3),
-                var(--c2) var(--_g)
-            ),
-            conic-gradient(
-                from 120deg at calc(100% / 3) calc(500% / 6),
-                var(--c1) var(--_g)
-            ),
-            conic-gradient(
-                from 120deg at calc(200% / 3) calc(500% / 6),
-                var(--c1) var(--_g)
-            ),
-            conic-gradient(
-                from -180deg at calc(100% / 3) 50%,
-                var(--c2) 60deg,
-                var(--c1) var(--_g)
-            ),
-            conic-gradient(
-                from 60deg at calc(200% / 3) 50%,
-                var(--c1) 60deg,
-                var(--c3) var(--_g)
-            ),
-            conic-gradient(
-                from -60deg at 50% calc(100% / 3),
-                var(--c1) 120deg,
-                var(--c2) 0 240deg,
-                var(--c3) 0
-            );
-            background-size: calc(var(--s) * 1.732) var(--s);
-        }
-
-        .preview.background2 {
-            --s: 20px;
-            --c1: #414141;
-            --c2: #bebebe;
-            --c3: #ffffff;
-            background: repeating-conic-gradient(
-                from 30deg,
-                #0000 0 120deg,
-                var(--c3) 0 180deg
-            )
-            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
-            repeating-conic-gradient(
-                from 30deg,
-                var(--c1) 0 60deg,
-                var(--c2) 0 120deg,
-                var(--c3) 0 180deg
-            );
-            background-size: var(--s) calc(var(--s) * 0.577);
-        }
-
-        .preview.background3 {
-            --s: 20px;
-            --c1: #1d1d1d;
-            --c2: #4e4f51;
-            --c3: #3c3c3c;
-            background: repeating-conic-gradient(
-                from 30deg,
-                #0000 0 120deg,
-                var(--c3) 0 180deg
-            )
-            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
-            repeating-conic-gradient(
-                from 30deg,
-                var(--c1) 0 60deg,
-                var(--c2) 0 120deg,
-                var(--c3) 0 180deg
-            );
-            background-size: var(--s) calc(var(--s) * 0.577);
-        }
+        /* .preview.background1, .background2, .background3 already defined earlier for buttons */
     </style>
 </head>
 <body>
@@ -436,7 +332,7 @@
     </div>
 
     <div class="content">
-        <h1>NOTICE:retrobowl is still in progress</h1>
+        <h1>NOTICE: retrobowl is still in progress</h1>
 
         <button class="paid-sponsor-btn" onclick="window.open('paidsponsor.html', '_blank')">
             <span>Paid sponsor<br>of Barry 63's games</span>
@@ -462,8 +358,8 @@
         <button onclick="startGame('./basketballrandom.html');"><span>Basketball random</span></button>
         <button onclick="startGame('./soccerrandom.html');"><span>soccer random</span></button>
         <button onclick="startGame('./geometrydash.html');"><span>geometry dash</span></button>
-        <button onclick="startGame('./mario.html');"><span>Super Mario Bros</span></span></button>
-        <button onclick="startGame('./becomeasponsor.html');"><span>Become a Sponsor</span></span></button>
+        <button onclick="startGame('./mario.html');"><span>Super Mario Bros</span></button>
+        <button onclick="startGame('./becomeasponsor.html');"><span>Become a Sponsor</span></button>
     </div>
 
     <div class="cookie-consent" id="cookieConsent" style="display: none;">
@@ -488,7 +384,7 @@
             document.body.style.overflow = 'hidden';
             document.querySelector('.content').style.display = 'none';
             document.querySelector('.cookie-consent').style.display = 'none';
-            document.querySelector('.background-previews').style.display = 'none'; // Hide previews
+            document.querySelector('.background-previews').style.display = 'none';
             const iframe = document.getElementById('gameIframe');
             iframe.src = url;
             iframe.style.display = 'block';
@@ -498,7 +394,7 @@
         function closeGame() {
             document.body.style.overflow = 'auto';
             document.querySelector('.content').style.display = 'block';
-            document.querySelector('.background-previews').style.display = 'flex'; // Show previews
+            document.querySelector('.background-previews').style.display = 'flex';
             const iframe = document.getElementById('gameIframe');
             iframe.src = '';
             iframe.style.display = 'none';
@@ -507,22 +403,15 @@
 
         function changeBackground(option) {
             const container = document.querySelector('.container');
-            container.className = 'container'; // Reset class
+            container.className = 'container';
             switch (option) {
-                case 1:
-                    container.classList.add('background1');
-                    break;
-                case 2:
-                    container.classList.add('background2');
-                    break;
-                case 3:
-                    container.classList.add('background3');
-                    break;
+                case 1: container.classList.add('background1'); break;
+                case 2: container.classList.add('background2'); break;
+                case 3: container.classList.add('background3'); break;
             }
             localStorage.setItem('selectedBackground', option);
         }
 
-        // Load saved background on page load
         window.addEventListener('load', () => {
             const savedBackground = localStorage.getItem('selectedBackground');
             if (savedBackground) {
@@ -530,7 +419,6 @@
             }
         });
 
-        // Resize background to be twice the document height
         function resizeBackground() {
             const fullHeight = document.documentElement.scrollHeight;
             document.querySelector('.container').style.height = (fullHeight * 2) + 'px';
