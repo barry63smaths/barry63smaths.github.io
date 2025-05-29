@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partner with Us - Barry63sGames</title>
-
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        window.onload = function() {
-            emailjs.init("OqNGKI3qEPqV67ZMM");  // Your EmailJS Public Key (User ID)
-        };
-    </script>
-
-    <!-- External CSS link (Optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="becomeasponsorstyles.css">
 </head>
 <body>
@@ -23,54 +14,13 @@
     <h3>Sponsorship Details:</h3>
     <p>Price: 5 AUD per month</p>
     <p>Payment: We only accept cash payments at this time, unless we can work something else out. If you're interested, feel free to reach out and we can discuss any options.</p>
-
-    <center>
-    <div class="signup-box">
-        <h2>Sign Up</h2>
-        <form id="signupForm">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-            <button type="submit">Subscribe</button>
-        </form>
-        <div class="success-message" id="successMessage" style="display: none;">
-            Thank you for signing up! I will send you an email shortly.
-        </div>
-    </div>
-    </center>
-
-    <script type="text/javascript">
-        // Function to handle form submission
-        function sendEmail(event) {
-            event.preventDefault();
-
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-
-            const templateParams = {
-                name: name,
-                email: email
-            };
-
-            // Call the emailjs.send() method with your Service ID and Template ID
-            emailjs.send("service_x5xxura", "template_d3t1szp", templateParams)  // Replace with your actual Service ID and Template ID
-                .then(function(response) {
-                    console.log('Success:', response);
-                    // Show success message
-                    document.getElementById("successMessage").style.display = "block";  
-                    // Reset form fields
-                    document.getElementById("signupForm").reset();
-                }, function(error) {
-                    console.log('Error:', error);
-                    alert("There was an error sending your message. Please try again.");
-                });
-        }
-
-        // Event listener for form submission
-        document.getElementById("signupForm").addEventListener("submit", sendEmail);
-    </script>
+    <h3>Due to multiple false requests i have took down the subscribe window</h3>
+    <p>Any Sponsorship requests will be sent to: barry63sgames@gmail.com</p>
+    <button onclick="window.location.href='https://outlook.live.com/mail/0/';">
+    Outlook
+    </button>
+    <button onclick="window.location.href='https://mail.google.com/mail/';">
+    Gmail
+    </button>
 </body>
 </html>
