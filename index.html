@@ -48,19 +48,89 @@
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
             z-index: 1;
+        }
+
+        .background1 {
+            --s: 84px;
+            --c1: #f2f2f2;
+            --c2: #cdcbcc;
+            --c3: #999999;
+            --_g: 0 120deg, #0000 0;
+            background: conic-gradient(
+                from 0deg at calc(500% / 6) calc(100% / 3),
+                var(--c3) var(--_g)
+            ),
+            conic-gradient(
+                from -120deg at calc(100% / 6) calc(100% / 3),
+                var(--c2) var(--_g)
+            ),
+            conic-gradient(
+                from 120deg at calc(100% / 3) calc(500% / 6),
+                var(--c1) var(--_g)
+            ),
+            conic-gradient(
+                from 120deg at calc(200% / 3) calc(500% / 6),
+                var(--c1) var(--_g)
+            ),
+            conic-gradient(
+                from -180deg at calc(100% / 3) 50%,
+                var(--c2) 60deg,
+                var(--c1) var(--_g)
+            ),
+            conic-gradient(
+                from 60deg at calc(200% / 3) 50%,
+                var(--c1) 60deg,
+                var(--c3) var(--_g)
+            ),
+            conic-gradient(
+                from -60deg at 50% calc(100% / 3),
+                var(--c1) 120deg,
+                var(--c2) 0 240deg,
+                var(--c3) 0
+            );
+            background-size: calc(var(--s) * 1.732) var(--s);
+        }
+
+        .background2 {
+            --s: 200px;
+            --c1: #414141;
+            --c2: #bebebe;
+            --c3: #ffffff;
             background: repeating-conic-gradient(
                 from 30deg,
                 #0000 0 120deg,
-                #3c3c3c 0 180deg
-            ) calc(0.5 * 200px) calc(0.5 * 200px * 0.577),
+                var(--c3) 0 180deg
+            )
+            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
             repeating-conic-gradient(
                 from 30deg,
-                #1d1d1d 0 60deg,
-                #4e4f51 0 120deg,
-                #3c3c3c 0 180deg
+                var(--c1) 0 60deg,
+                var(--c2) 0 120deg,
+                var(--c3) 0 180deg
             );
-            background-size: 200px calc(200px * 0.577);
+            background-size: var(--s) calc(var(--s) * 0.577);
+        }
+
+        .background3 {
+            --s: 200px;
+            --c1: #1d1d1d;
+            --c2: #4e4f51;
+            --c3: #3c3c3c;
+            background: repeating-conic-gradient(
+                from 30deg,
+                #0000 0 120deg,
+                var(--c3) 0 180deg
+            )
+            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+            repeating-conic-gradient(
+                from 30deg,
+                var(--c1) 0 60deg,
+                var(--c2) 0 120deg,
+                var(--c3) 0 180deg
+            );
+            background-size: var(--s) calc(var(--s) * 0.577);
         }
 
         .content {
@@ -252,10 +322,114 @@
         .paid-sponsor-btn:hover {
             background-color: #cc0000 !important;
         }
+
+        .background-previews {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .preview {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border: 2px solid white;
+            background-size: cover;
+        }
+
+        .preview.background1 {
+            --s: 20px;
+            --c1: #f2f2f2;
+            --c2: #cdcbcc;
+            --c3: #999999;
+            --_g: 0 120deg, #0000 0;
+            background: conic-gradient(
+                from 0deg at calc(500% / 6) calc(100% / 3),
+                var(--c3) var(--_g)
+            ),
+            conic-gradient(
+                from -120deg at calc(100% / 6) calc(100% / 3),
+                var(--c2) var(--_g)
+            ),
+            conic-gradient(
+                from 120deg at calc(100% / 3) calc(500% / 6),
+                var(--c1) var(--_g)
+            ),
+            conic-gradient(
+                from 120deg at calc(200% / 3) calc(500% / 6),
+                var(--c1) var(--_g)
+            ),
+            conic-gradient(
+                from -180deg at calc(100% / 3) 50%,
+                var(--c2) 60deg,
+                var(--c1) var(--_g)
+            ),
+            conic-gradient(
+                from 60deg at calc(200% / 3) 50%,
+                var(--c1) 60deg,
+                var(--c3) var(--_g)
+            ),
+            conic-gradient(
+                from -60deg at 50% calc(100% / 3),
+                var(--c1) 120deg,
+                var(--c2) 0 240deg,
+                var(--c3) 0
+            );
+            background-size: calc(var(--s) * 1.732) var(--s);
+        }
+
+        .preview.background2 {
+            --s: 20px;
+            --c1: #414141;
+            --c2: #bebebe;
+            --c3: #ffffff;
+            background: repeating-conic-gradient(
+                from 30deg,
+                #0000 0 120deg,
+                var(--c3) 0 180deg
+            )
+            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+            repeating-conic-gradient(
+                from 30deg,
+                var(--c1) 0 60deg,
+                var(--c2) 0 120deg,
+                var(--c3) 0 180deg
+            );
+            background-size: var(--s) calc(var(--s) * 0.577);
+        }
+
+        .preview.background3 {
+            --s: 20px;
+            --c1: #1d1d1d;
+            --c2: #4e4f51;
+            --c3: #3c3c3c;
+            background: repeating-conic-gradient(
+                from 30deg,
+                #0000 0 120deg,
+                var(--c3) 0 180deg
+            )
+            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+            repeating-conic-gradient(
+                from 30deg,
+                var(--c1) 0 60deg,
+                var(--c2) 0 120deg,
+                var(--c3) 0 180deg
+            );
+            background-size: var(--s) calc(var(--s) * 0.577);
+        }
     </style>
 </head>
 <body>
-    <div class="container"></div>
+    <div class="container background1"></div>
+
+    <div class="background-previews">
+        <div class="preview background1" onclick="changeBackground(1)"></div>
+        <div class="preview background2" onclick="changeBackground(2)"></div>
+        <div class="preview background3" onclick="changeBackground(3)"></div>
+    </div>
 
     <div class="back-tab" onclick="closeGame()" style="display: none;">
         ← <span>Back</span>
@@ -328,6 +502,31 @@
             iframe.style.display = 'none';
             document.querySelector('.back-tab').style.display = 'none';
         }
+
+        function changeBackground(option) {
+            const container = document.querySelector('.container');
+            container.className = 'container'; // Reset class
+            switch (option) {
+                case 1:
+                    container.classList.add('background1');
+                    break;
+                case 2:
+                    container.classList.add('background2');
+                    break;
+                case 3:
+                    container.classList.add('background3');
+                    break;
+            }
+            localStorage.setItem('selectedBackground', option);
+        }
+
+        // Load saved background on page load
+        window.addEventListener('load', () => {
+            const savedBackground = localStorage.getItem('selectedBackground');
+            if (savedBackground) {
+                changeBackground(parseInt(savedBackground));
+            }
+        });
 
         // Resize background to be twice the document height
         function resizeBackground() {
