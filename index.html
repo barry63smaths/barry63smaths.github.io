@@ -488,6 +488,7 @@
             document.body.style.overflow = 'hidden';
             document.querySelector('.content').style.display = 'none';
             document.querySelector('.cookie-consent').style.display = 'none';
+            document.querySelector('.background-previews').style.display = 'none'; // Hide previews
             const iframe = document.getElementById('gameIframe');
             iframe.src = url;
             iframe.style.display = 'block';
@@ -497,6 +498,7 @@
         function closeGame() {
             document.body.style.overflow = 'auto';
             document.querySelector('.content').style.display = 'block';
+            document.querySelector('.background-previews').style.display = 'flex'; // Show previews
             const iframe = document.getElementById('gameIframe');
             iframe.src = '';
             iframe.style.display = 'none';
