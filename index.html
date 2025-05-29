@@ -29,21 +29,26 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             position: relative;
             background-color: #1a1a1a;
-            overflow: auto;
+            overflow-x: hidden;
         }
 
         .container {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200%;
+            z-index: 1;
             background: repeating-conic-gradient(
                 from 30deg,
                 #0000 0 120deg,
@@ -56,14 +61,10 @@
                 #3c3c3c 0 180deg
             );
             background-size: 200px calc(200px * 0.577);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
         }
 
         .content {
-            text-align: center;
+            position: relative;
             z-index: 2;
             color: white;
             padding: 20px;
@@ -72,12 +73,13 @@
             border-radius: 12px;
             width: 100%;
             max-width: 350px;
-            margin: auto;
+            margin: 40px auto;
         }
 
         h1 {
             font-size: 2.8em;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         button {
@@ -225,24 +227,8 @@
             }
         }
 
-        .about-blank-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #ff0000;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        /* Paid sponsor button red styles */
         .paid-sponsor-btn {
-            background-color: #ff0000 !important;  /* solid red */
+            background-color: #ff0000 !important;
             color: white !important;
             border: none !important;
             box-shadow: none !important;
@@ -260,11 +246,11 @@
         }
 
         .paid-sponsor-btn::before {
-            display: none !important;  /* remove green gradient shine */
+            display: none !important;
         }
 
         .paid-sponsor-btn:hover {
-            background-color: #cc0000 !important; /* darker red on hover */
+            background-color: #cc0000 !important;
         }
     </style>
 </head>
@@ -278,7 +264,6 @@
     <div class="content">
         <h1>RETROBOWL added</h1>
 
-        <!-- Paid Sponsor button opens paidsponsor.html in new tab -->
         <button class="paid-sponsor-btn" onclick="window.open('paidsponsor.html', '_blank')">
             <span>Paid sponsor<br>of Barry 63's games</span>
         </button>
@@ -314,10 +299,7 @@
 
     <iframe id="gameIframe" src=""></iframe>
 
-    <button class="about-blank-button" onclick="openCurrentInBlank()">Open in About:Blank</button>
-
     <script>
-        // Check if the user has accepted cookies
         if (!localStorage.getItem("cookiesAccepted")) {
             document.getElementById("cookieConsent").style.display = 'block';
         }
@@ -328,39 +310,33 @@
         }
 
         function startGame(url) {
-            window.scrollTo(0, 0); // Scroll to the top
-            document.body.style.overflow = 'hidden'; // Lock scroll
+            window.scrollTo(0, 0);
+            document.body.style.overflow = 'hidden';
             document.querySelector('.content').style.display = 'none';
             document.querySelector('.cookie-consent').style.display = 'none';
-            var iframe = document.getElementById('gameIframe');
+            const iframe = document.getElementById('gameIframe');
             iframe.src = url;
             iframe.style.display = 'block';
-            iframe.style.position = 'fixed'; // Center iframe on screen
-            iframe.style.top = '0';
-            iframe.style.left = '0';
-            iframe.style.width = '100vw';
-            iframe.style.height = '100vh';
             document.querySelector('.back-tab').style.display = 'block';
-            document.querySelector('.about-blank-button').style.display = 'none';
         }
 
         function closeGame() {
-            document.body.style.overflow = 'auto'; // Enable scroll again
+            document.body.style.overflow = 'auto';
             document.querySelector('.content').style.display = 'block';
-            var iframe = document.getElementById('gameIframe');
+            const iframe = document.getElementById('gameIframe');
             iframe.src = '';
             iframe.style.display = 'none';
             document.querySelector('.back-tab').style.display = 'none';
-            document.querySelector('.about-blank-button').style.display = 'block';
         }
 
-        function openCurrentInBlank() {
-            var newWindow = window.open('about:blank', '_blank');
-            var currentContent = document.documentElement.outerHTML;
-            newWindow.document.open();
-            newWindow.document.write(currentContent);
-            newWindow.document.close();
+        // Resize background to be twice the document height
+        function resizeBackground() {
+            const fullHeight = document.documentElement.scrollHeight;
+            document.querySelector('.container').style.height = (fullHeight * 2) + 'px';
         }
+
+        window.addEventListener('load', resizeBackground);
+        window.addEventListener('resize', resizeBackground);
     </script>
 </body>
 </html>
