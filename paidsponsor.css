@@ -29,9 +29,8 @@ img {
     border-radius:50px;
     text-align: center;
     transform: translateY(20px);
-    animation-duration: 1s;
+    transition-duration:0.3s;
 }
-@keyframes subscribe{
-    from{margin-top: ;}
-    to{margin-bottom: ;}
+#box1:hover{
+    transform: translateY(-3px);
 }
