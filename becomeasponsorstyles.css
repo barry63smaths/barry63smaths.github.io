@@ -28,7 +28,7 @@ button{
     transition-duration:0.3s;
 }
 button:hover{
-background-color:red;
+background-color:#990000;
     border-radius:50px;
-    transform: translate(0px, 5px);
+    transform: translate(0px, 2px);
 }
