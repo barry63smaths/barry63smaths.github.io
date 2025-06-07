@@ -1,0 +1,72 @@
+body {
+  display: flex;
+  justify-content: flex-start; /* align to left */
+  align-items: center;         /* vertically centered */
+  height: 100vh;
+  margin: 0;
+  padding-left: 40px;          /* optional: spacing from edge */
+  background-color: #eaeaea;
+}
+
+
+#display {
+    background-color: grey;
+    width: 360px;
+    height: 640px;
+    border-radius: 30px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.icon:hover{
+    transform: scale(1.1);
+    border-radius: 20px;
+    transition: all ease-in-out .1s;
+}
+.icon:active{
+    transform: scale(.9);
+}
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  width: 360px; /* match your phone width */
+}
+.nav-button {
+  font-size: 24px;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+.nav-button:hover {
+  background-color: #555;
+}
+#text{
+    transform: translateX(100px);
+    height: 800px;
+    width: 70%;
+    background-color: rgba(92, 92, 92, 0.363);
+    border-radius: 100px;
+    align-items: center;
+}
+h1{
+text-align: center;
+font-size: 60px;
+}
+p{
+    text-align: center;
+    font-size: 30px;
+}
