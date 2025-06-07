@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Boring Clicker</title>
+  </head>
+  <body>
+    <h1 id="counter">0</h1>
+    <br />
+    <button class="increase"
+      onclick="
+    const h1 = document.getElementById('counter');
+    const count = parseInt(h1.textContent) + 1;
+    h1.textContent = count;
+    localStorage.setItem('counterValue', count);
+  "
+    >
+      +1
+    </button>
+    <script>
+      const saved = localStorage.getItem("counterValue");
+      if (saved !== null) {
+        document.getElementById("counter").textContent = saved;
+      }
+    </script>
+  </body>
+</html>
