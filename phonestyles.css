@@ -5,12 +5,16 @@ body {
   height: 100vh;
   margin: 0;
   padding-left: 40px;          /* optional: spacing from edge */
-  background-color: #eaeaea;
+  background-image: url('siteimages/barry.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow-x: hidden;    
+  font-family: sans-serif;      /* ✅ prevents side scroll */
 }
 
-
 #display {
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0.897);
     width: 360px;
     height: 640px;
     border-radius: 30px;
@@ -28,12 +32,12 @@ body {
     object-fit: cover;
     border-radius: 12px;
 }
-.icon:hover{
+.icon:hover {
     transform: scale(1.1);
     border-radius: 20px;
     transition: all ease-in-out .1s;
 }
-.icon:active{
+.icon:active {
     transform: scale(.9);
 }
 .nav-buttons {
@@ -54,19 +58,26 @@ body {
 .nav-button:hover {
   background-color: #555;
 }
-#text{
-    transform: translateX(100px);
-    height: 800px;
-    width: 70%;
-    background-color: rgba(92, 92, 92, 0.363);
+
+#text {
+    /* Removed translateX and fixed sizing */
+    width: calc(100% - 400px);       /* ✅ fits next to #display */
+    max-width: 650px;
+    height: calc(650px);      /* ✅ fits screen height */
+    background-color: rgba(172, 172, 172, 0.918);
     border-radius: 100px;
     align-items: center;
+    margin-left: 40px;               /* ✅ spacing between display and text */
+    flex-direction: column;
+    justify-content: center;
 }
-h1{
-text-align: center;
-font-size: 60px;
+
+h1 {
+  text-align: center;
+  font-size: 60px;
 }
-p{
+p {
     text-align: center;
     font-size: 30px;
+    color: red;
 }
