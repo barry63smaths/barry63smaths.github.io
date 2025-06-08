@@ -1,25 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Barry 63's games</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Barry 63's games" />
+    <link rel="apple-touch-icon" href="siteimages/barry.png" />
+
+    <!-- Android Theme Color -->
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0DW0ZG97K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Z0DW0ZG97K');
+    </script>
+
+    <style>
+      body, html {
+        margin: 0; padding: 0; height: 100%;
+        font-family: sans-serif;
+      }
+      .iframe-wrapper {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+      iframe {
+        border: none;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .homebtn {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 10;
+        padding: 10px 16px;
+        background-color: rgba(0,0,0,0.6);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .homebtn:active {
+        background-color: rgba(0,0,0,0.8);
+      }
+    </style>
 </head>
 <body>
-   <div class="iframe-wrapper">
-  <button class="homebtn" onclick="reloadIframe()">Back</button>
-  <iframe id="myIframe" src="phone1.html"></iframe>
-</div>
-<script>
-  function reloadIframe() {
-    const iframe = document.getElementById('myIframe');
-    const src = iframe.src; // Save current src
-    iframe.src = '';        // Clear it to force a reset
-    setTimeout(() => {
-      iframe.src = src;     // Reload after a short delay
-    }, 50); // short delay ensures reload triggers
-  }
-</script>
+  <div class="iframe-wrapper">
+    <button class="homebtn" onclick="reloadIframe()">Back</button>
+    <iframe id="myIframe" src="phone1.html"></iframe>
+  </div>
+
+  <script>
+    function reloadIframe() {
+      const iframe = document.getElementById('myIframe');
+      const src = iframe.src;
+      iframe.src = ''; // unload iframe to free memory
+      setTimeout(() => {
+        iframe.src = src;
+      }, 50);
+    }
+  </script>
 </body>
 </html>
