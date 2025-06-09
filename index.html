@@ -47,19 +47,26 @@
       .homebtn {
         position: absolute;
         top: 12px;
-        left: 12px;
+        left: -55px;
         z-index: 10;
         padding: 10px 16px;
-        background-color: rgba(0,0,0,0.6);
+        background-color: #555555;
         color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 15px;
         font-size: 16px;
         cursor: pointer;
         user-select: none;
+        transition-duration: 0.5s;
+      }
+      .homebtn:hover{
+        transform: translateX(45px);
+        border-radius: 5px;
       }
       .homebtn:active {
-        background-color: rgba(0,0,0,0.8);
+        scale: 90%;
+        background-color: #000000;
+        transition-duration: 0.3s;
       }
     </style>
 </head>
