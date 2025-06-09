@@ -62,7 +62,7 @@ body {
 #text {
     /* Removed translateX and fixed sizing */
     width: calc(100% - 400px);       /* ✅ fits next to #display */
-    max-width: 650px;
+    max-width: 780px;
     height: calc(650px);      /* ✅ fits screen height */
     background-color: rgba(172, 172, 172, 0.918);
     border-radius: 100px;
