@@ -1,75 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Barry 63</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Barry 63</title>
 
-   
-    <link rel="manifest" href="manifest.json" />
-    <link rel="icon" type="image/x-icon" href="siteimages/barry.png">
-   
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Barry 63's games" />
-    <link rel="apple-touch-icon" href="siteimages/appicon.png" />
-    <link rel="apple-touch-icon" href="siteimages/barry.png" />
+  <!-- iOS & Chrome PWA meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Barry 63" />
+  <link rel="apple-touch-icon" href="/siteimages/appicon.png" />
 
-    <!-- Android Theme Color -->
-    <meta name="theme-color" content="#000000" />
+  <!-- Theme color -->
+  <meta name="theme-color" content="#000000" />
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0DW0ZG97K"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Z0DW0ZG97K');
-    </script>
+  <!-- Use a real manifest.json file -->
+  <link rel="manifest" href="/manifest.json">
 
-    <style>
-      body, html {
-        margin: 0; padding: 0; height: 100%;
-        font-family: sans-serif;
-      }
-      .iframe-wrapper {
-        position: relative;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-      }
-      iframe {
-        border: none;
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-      .homebtn {
-        position: absolute;
-        top: 12px;
-        left: -55px;
-        z-index: 10;
-        padding: 10px 16px;
-        background-color: #555555;
-        color: white;
-        border: none;
-        border-radius: 15px;
-        font-size: 16px;
-        cursor: pointer;
-        user-select: none;
-        transition-duration: 0.5s;
-      }
-      .homebtn:hover{
-        transform: translateX(45px);
-        border-radius: 5px;
-      }
-      .homebtn:active {
-        scale: 90%;
-        background-color: #000000;
-        transition-duration: 0.3s;
-      }
-    </style>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+    .iframe-wrapper {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .homebtn {
+      position: absolute;
+      top: 12px;
+      left: -55px;
+      z-index: 10;
+      padding: 10px 16px;
+      background-color: #555555;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    .homebtn:hover {
+      transform: translateX(45px);
+      border-radius: 5px;
+    }
+    .homebtn:active {
+      scale: 90%;
+      background-color: #000000;
+      transition-duration: 0.3s;
+    }
+  </style>
 </head>
+
 <body>
   <div class="iframe-wrapper">
     <button class="homebtn" onclick="reloadIframe()">Back</button>
@@ -77,13 +70,17 @@
   </div>
 
   <script>
+    // Reload iframe button
     function reloadIframe() {
       const iframe = document.getElementById('myIframe');
       const src = iframe.src;
-      iframe.src = ''; // unload iframe to free memory
-      setTimeout(() => {
-        iframe.src = src;
-      }, 50);
+      iframe.src = '';
+      setTimeout(() => iframe.src = src, 50);
+    }
+
+    // Register service worker for Chrome install
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js");
     }
   </script>
 </body>
