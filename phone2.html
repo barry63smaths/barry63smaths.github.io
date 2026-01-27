@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="phonestyles.css" />
@@ -20,5 +20,21 @@
       <p class="p">More games coming soon!</p>
     </div>
   </body>
-
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/sw.js").then(
+          function (registration) {
+            console.log(
+              "ServiceWorker registration successful with scope: ",
+              registration.scope,
+            );
+          },
+          function (err) {
+            console.log("ServiceWorker registration failed: ", err);
+          },
+        );
+      });
+    }
+  </script>
 </html>
