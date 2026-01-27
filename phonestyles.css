@@ -14,16 +14,21 @@ body {
 }
 
 #display {
-    background-color: rgba(128, 128, 128, 0.897);
-    width: 360px;
-    height: 640px;
-    border-radius: 30px;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    overflow-y: auto;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-color: rgba(128, 128, 128, 0.897);
+  width: 360px;
+  height: 640px;
+  border-radius: 30px;
+  padding: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  justify-content: flex-start;  /* 👈 apps start from left */
+  align-content: flex-start;    /* 👈 rows stack naturally */
+
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .icon {
@@ -45,6 +50,8 @@ body {
   justify-content: space-between;
   margin-top: 15px;
   width: 360px; /* match your phone width */
+  flex-basis: 100%;
+  width: 100%;
 }
 .nav-button {
   font-size: 24px;
